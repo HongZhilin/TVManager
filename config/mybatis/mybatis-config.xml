@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"  
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="cn.edu.zjut.entity.User" alias="User"/>
+		<typeAlias type="cn.edu.zjut.entity.Role" alias="Role"/>
+		<typeAlias type="cn.edu.zjut.entity.Menu" alias="Menu"/>
+		
+		<typeAlias type="cn.edu.zjut.entity.Info" alias="Info"/>
+		<!-- <typeAlias type="cn.edu.zjut.entity.Program" alias="Program"/>
+		<typeAlias type="cn.edu.zjut.entity.Channel" alias="Channel"/> -->
+		
+		<typeAlias type="cn.edu.zjut.util.PageData" alias="pd"/>
+		<typeAlias type="cn.edu.zjut.entity.Page" alias="Page"/>
+	</typeAliases>
+	
+	<plugins>
+		<plugin interceptor="cn.edu.zjut.plugin.PagePlugin">
+			<property name="dialect" value="mysql"/>
+			<property name="pageSqlId" value=".*listPage.*"/>
+		</plugin>
+	</plugins>
+	
+	<mappers>
+		<mapper resource="mybatis/system/User.xml"/>
+		<mapper resource="mybatis/system/Role.xml"/>
+		<mapper resource="mybatis/system/Menu.xml"/>
+		<mapper resource="mybatis/tvprogram/Info.xml"/>
+		<mapper resource="mybatis/tvprogram/Program.xml"/>
+		<mapper resource="mybatis/tvprogram/Channel.xml"/>
+	</mappers>
+	
+</configuration>
