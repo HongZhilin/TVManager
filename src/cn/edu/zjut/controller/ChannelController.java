@@ -33,13 +33,11 @@ public class ChannelController extends BaseController {
 	
 	@RequestMapping(value="/findByProvinceName",method= RequestMethod.GET)
 	public @ResponseBody List<PageData> getChannelNameByProvinceName(@RequestParam(value ="provinceName", required = true) String provinceName){
-		//String pName=Tools.encodeStr(provinceName);
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		List<PageData> channelName= channelService.findByProvinceName(pd);
 		return channelName;
 	}
-	
 		
 	/**
 	 * 显示电视台列表
