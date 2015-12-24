@@ -31,11 +31,14 @@ public class ChannelController extends BaseController {
 		return provinceList;
 	}
 	
-	@RequestMapping(value="/findByProvinceName",method= RequestMethod.GET)
-	public @ResponseBody List<PageData> getChannelNameByProvinceName(@RequestParam(value ="provinceName", required = true) String provinceName){
+	@RequestMapping(value="/findByProvinceName",method= RequestMethod.POST)
+	public @ResponseBody List<String> getChannelNameByProvinceName(){
+		//String pName=Tools.encodeStr(provinceName);
+		//tomat下 获取的数据乱码
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		List<PageData> channelName= channelService.findByProvinceName(pd);
+		pd.putAll(getPageData());
+		List<String> channelName= channelService.findByProvinceName(pd);
 		return channelName;
 	}
 		

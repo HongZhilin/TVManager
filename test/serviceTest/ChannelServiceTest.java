@@ -29,7 +29,7 @@ public class ChannelServiceTest {
 	public void testfindByProvinceName() throws Exception {
 		ChannelService channelMapper = (ChannelService) applicationContext.getBean("channelService");
 		PageData pd = new PageData();
-		List<PageData>  provinceList =  channelMapper.findByProvinceName(pd);
+		List<String>  provinceList =  channelMapper.findByProvinceName(pd);
 		System.out.println(provinceList);
 	}
 

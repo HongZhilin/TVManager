@@ -28,8 +28,8 @@
     </select>
     
     <!-- 根据省份查询电视台列表 -->
-    <select id="findByProviceName" parameterType="page" resultType="pd"> 
-        select distinct channel_name from tb_channel where province_name =#{pd.provinceName}
+    <select id="findByProvinceName" parameterType="pd" resultType="String"> 
+        select distinct channel_name from tb_channel where province_name = #{province}
     </select>
     
     <!-- 根据电视台编码查询信息 -->

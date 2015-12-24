@@ -18,5 +18,28 @@ public class ProgramServiceImpl implements ProgramService{
 		return programMapper.programlistPage(page);
 	}
 
+	public void saveProgram(PageData pd) {
+		programMapper.saveProgram(pd);
+		
+	}
+
+	public void editProgram(PageData pd) {
+		programMapper.editProgram(pd);
+		
+	}
+
+	public void deleteProgramById(PageData pd) {
+		programMapper.deleteProgramById(pd);
+		
+	}
+
+	public PageData findProgramById(PageData pd) {
+		return programMapper.findProgramById(pd);
+	}
+
+	public void deletePrograms(Integer[] id) {
+		programMapper.deletePrograms(id);
+		
+	}
 
 }

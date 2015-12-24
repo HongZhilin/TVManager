@@ -29,7 +29,7 @@ public class ChannelMapperTest {
 	public void testListChannelNameByProvinceName() throws Exception {
 		ChannelMapper channelMapper = (ChannelMapper) applicationContext.getBean("channelMapper");
 		PageData pd = new PageData();
-		List<PageData> channelName= channelMapper.findByProvinceName(pd);
+		List<String> channelName= channelMapper.findByProvinceName(pd);
 		System.out.println(channelName);
 	}
 

@@ -15,7 +15,45 @@
 	</resultMap> -->
 	
 	<select id="programlistPage" parameterType="page" resultType="pd">
-		select * from tb_program  
+		select * from tb_program
+		<where>
+		   <if test="pd.province!=null and pd.province!=''">
+               and province=#{pd.province}
+           </if>
+           <if test="pd.channelName!=null and pd.channelName !=''">
+                and channel_name=#{pd.channelName}
+           </if>
+           <if test="pd.program!=null and pd.program !=''">
+                and program= "%"#{pd.program}"%"
+           </if>  
+		</where> 
 	</select>
+	
+	<!-- 查询信息 -->
+    <select id="findProgramById" parameterType="page" resultType="pd">
+        select * from tb_program  where id =#{id}
+    </select>
+    
+    <!-- 新增 -->
+    <insert id="saveProgram" parameterType="pd">
+        insert into tb_program (province,channel_name,channel_id,program,starttime,endtime,during) values(#{province},#{channelName},#{channelId},#{program},#{starttime},#{endtime},#{during})
+    </insert>
+    
+    <!-- 修改 -->
+    <update id="editProgram" parameterType="pd">
+        update tb_program set g_id =#{g_id}, province =#{province}, channel_name =#{channelName}, channel_id = #{channelId},program=#{program}, starttime=#{starttime},endtime=#{endtime},during=#{during} where id=#{id}
+    </update>
+    
+    <!-- 删除 -->
+    <delete id="deleteProgramById" parameterType="pd">
+        delete from tb_program  where id =#{id} 
+    </delete>
+    <!-- 删除 -->
+    <delete id="deletePrograms" parameterType="int">
+        delete from tb_program  where id in
+        <foreach item="idItem" collection="array" open="(" separator="," close=")"> 
+            #{idItem}
+        </foreach>        
+    </delete>
 
 </mapper>

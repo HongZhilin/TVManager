@@ -22,8 +22,8 @@ public class ChannelServiceImpl implements ChannelService{
 		return channelMapper.provincelist();
 	}
 
-	public List<PageData> findByProvinceName(PageData pd) {
-		return (List<PageData>) channelMapper.findByProvinceName(pd);
+	public List<String> findByProvinceName(PageData pd) {
+		return channelMapper.findByProvinceName(pd);
 	}
 
 	public void delete(PageData pd) {

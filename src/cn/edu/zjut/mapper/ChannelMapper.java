@@ -14,7 +14,7 @@ public interface ChannelMapper {
 	List<String> provincelist();
 	
 	/* 根据省份名称查询电视台列表*/
-	List<PageData> findByProvinceName(PageData pd);
+	List<String> findByProvinceName(PageData pd);
 	
 	/* 删除 */
 	void delete(PageData pd);

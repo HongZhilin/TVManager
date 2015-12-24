@@ -11,8 +11,8 @@ public interface ChannelService {
 	
 	List<String> provincelist( );
 	
-	List<PageData> findByProvinceName(PageData pd);
-
+	List<String> findByProvinceName(PageData pd);
+	
 	void delete(PageData pd);
 
 	/*
