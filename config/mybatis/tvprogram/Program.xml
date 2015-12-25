@@ -48,7 +48,8 @@
     <delete id="deleteProgramById" parameterType="pd">
         delete from tb_program  where id =#{id} 
     </delete>
-    <!-- 删除 -->
+    
+    <!-- 批量删除 -->
     <delete id="deletePrograms" parameterType="int">
         delete from tb_program  where id in
         <foreach item="idItem" collection="array" open="(" separator="," close=")"> 
