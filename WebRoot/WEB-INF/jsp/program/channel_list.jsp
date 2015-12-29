@@ -20,7 +20,6 @@
            		$(".provinceName").append($("<option/>").text(data[n]).attr("value",data[n])); 
            });
        });
-		
 	});
 	
 	//检索
@@ -60,21 +59,6 @@
 			});
    		dg.ShowDialog();
 	}
-	
-	//删除
-	/* function delChannel(channel_id){
-		confirm("确定要删除该记录?", function(result) {
-			if(result) {
-				var url = "channel/delete.html?channel_id="+channel_id+"&tm="+new Date().getTime();
-				alert(url);
-				$.get(url,function(data){
-					if(data=="success"){
-						nextPage(${page.currentPage});
-					}
-				});
-			}
-		});
-	}  */
 	
 	//删除
 	 function delChannel(id){
