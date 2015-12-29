@@ -13,9 +13,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".main_info:even").addClass("main_table_even");
-		//alert(${user.page.currentPage});
-		//alert(${user.page.showCount});
-		//alert(${(user.page.currentPage-1)*(user.page.showCount)});
 	});
 	
 	function sltAllUser(){
@@ -147,7 +144,6 @@
 		</div>
 		${user.page.pageStr}
 	</div>
-		
 	</form>	
 </body>
 </html>

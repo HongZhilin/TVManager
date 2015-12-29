@@ -10,6 +10,13 @@ import cn.edu.zjut.entity.Page;
 import cn.edu.zjut.util.Logger;
 import cn.edu.zjut.util.PageData;
 
+/**
+ * 
+ * description:基础Controller
+ * @author HZL
+ * @date 2015年12月29日 下午9:37:33
+ *
+ */
 public class BaseController {
 	
 	protected Logger logger = Logger.getLogger(this.getClass());

@@ -4,6 +4,9 @@ import cn.edu.zjut.util.Const;
 import cn.edu.zjut.util.PageData;
 import cn.edu.zjut.util.Tools;
 
+/**
+ * 分页 
+ */
 public class Page {
 	private int showCount; 		//每页显示记录数
 	private int totalPage;		//总页数

@@ -97,7 +97,6 @@
 					if(trIndex%2==0){
 						$("tr[name='subTr"+menuId+"']").addClass("main_table_even");
 					}
-					//alert($(".main_table").html());
 				}else{
 					$("#tempTr"+menuId+" > td").html("没有相关数据");
 				}
@@ -140,7 +139,6 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
-	
 	<div class="page_and_btn">
 		<div>
 			<a href="javascript:addmenu();" class="myBtn"><em>新增</em></a>

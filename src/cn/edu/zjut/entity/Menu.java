@@ -4,10 +4,10 @@ import java.util.List;
 
 public class Menu {
 	
-	private Integer menuId;
-	private String menuName;
-	private String menuUrl;
-	private Integer parentId;
+	private Integer menuId;   //菜单id
+	private String menuName;  //菜单名称
+	private String menuUrl;	  //菜单Url
+	private Integer parentId; //父菜单id
 	
 	private Menu parentMenu;
 	private List<Menu> subMenu;
