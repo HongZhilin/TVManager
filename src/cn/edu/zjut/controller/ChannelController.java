@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -33,6 +34,7 @@ public class ChannelController extends BaseController {
 	@RequestMapping(value="/findByProvinceName",method= RequestMethod.POST)
 	public @ResponseBody List<String> getChannelNameByProvinceName(){
 		//String pName=Tools.encodeStr(provinceName);
+		//tomat下 获取的数据乱码
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		pd.putAll(getPageData());
