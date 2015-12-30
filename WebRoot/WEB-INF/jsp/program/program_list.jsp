@@ -103,6 +103,10 @@
 	        }
 	        //document.location.reload();
 	    } 
+	    
+	     function export2Excel(){
+             document.location ="${pageContext.request.contextPath }/program/export2Excel.html";
+         }
 	</script>
 </head>
 <body>
@@ -164,8 +168,8 @@
 		<div>
 			<a href="javascript:deletePrograms();" class="myBtn"><em>批量删除</em></a>
 			<a href="javascript:addProgram();" class="myBtn"><em>新增</em></a>
-			<a href="javascript:exportProgram();" class="myBtn"><em>从excel导入</em></a>
-			<a href="javascript:exportProgram();" class="myBtn"><em>导出到excel</em></a>
+			<a href="javascript:importProgram();" class="myBtn"><em>从excel导入</em></a>
+			<a href="javascript:export2Excel();" class="myBtn"><em>导出到excel</em></a>
 		</div>
 		${page.pageStr}
 	</div>
