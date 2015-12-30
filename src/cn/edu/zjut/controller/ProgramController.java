@@ -1,10 +1,15 @@
 package cn.edu.zjut.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,7 @@ import cn.edu.zjut.controller.BaseController;
 import cn.edu.zjut.entity.Page;
 import cn.edu.zjut.service.ProgramService;
 import cn.edu.zjut.util.PageData;
+import cn.edu.zjut.view.ProgramExcelView;
 
 @Controller
 @RequestMapping(value="/program")
@@ -23,6 +29,8 @@ public class ProgramController extends BaseController{
 	
 	@Autowired
 	private ProgramService programService;
+	
+	private final Logger log = LoggerFactory.getLogger(ProgramController.class);
 	
 	@RequestMapping(value="/list")
 	public ModelAndView list(HttpSession session,Page page) throws Exception{
@@ -154,6 +162,30 @@ public class ProgramController extends BaseController{
 			logger.error(e.toString(), e);
 		}
 		return "redirect:/program/list.html";
+
+	}
+	
+	@RequestMapping("/export2Excel")
+	public ModelAndView export2Excel(Page page) {
+		Map<String,Object> dataMap = new HashMap<String,Object>();
+		List<String> titles = new ArrayList<String>();
+		//电视台名称 	省份 	电视台编码 	节目名称 	开始时间 	结束时间 	持续时间（s） 	
+		titles.add("电视台名称 ");
+		titles.add("省份");
+		titles.add("电视台编码");
+		titles.add("节目名称 ");
+		titles.add("开始时间  ");	
+		titles.add("结束时间  ");		
+		titles.add("持续时间（s）");
+		dataMap.put("titles", titles);	
+		
+		List<PageData> programList = programService.list(page);
+		
+		dataMap.put("programList", programList);
+		ProgramExcelView pev = new ProgramExcelView();
+		ModelAndView mv = new ModelAndView(pev,dataMap);
+		log.info("导出用户观看电视节目信息到Excel表成功");
+		return mv;
 
 	}
 	
