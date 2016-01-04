@@ -251,11 +251,11 @@ public class ProgramController extends BaseController{
 			return;
 		}
 		try{
-			//存储图片的物理路径
+			//存储excel的物理路径
 			String filepath = "E:\\upload\\";
-			//新的图片名称
+			//新的excel名称
 			String newFileName = UUID.randomUUID() + name.substring(name.lastIndexOf("."));
-			//新图片
+			//新excel
 			File newFile = new File(filepath+newFileName);	
 			//将内存中的数据写入磁盘
 			excelFile.transferTo(newFile);
