@@ -21,4 +21,6 @@ public interface ProgramService {
 	void deleteProgramById(PageData pd);
 
 	void deletePrograms(Integer[] id);
+	
+	void importFromExcel(List list);
 }

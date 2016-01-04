@@ -22,4 +22,6 @@ public interface ProgramMapper {
 	
 	/* 批量删除 */
 	void deletePrograms(Integer[] id);
+	
+	void importFromExcel(List<PageData> list);
 }

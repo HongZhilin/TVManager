@@ -41,5 +41,9 @@ public class ProgramServiceImpl implements ProgramService{
 		programMapper.deletePrograms(id);
 		
 	}
+	
+	public void importFromExcel(List list) {
+		programMapper.importFromExcel(list);
+	}
 
 }
