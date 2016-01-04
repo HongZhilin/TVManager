@@ -1,11 +1,20 @@
 package cn.edu.zjut.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,13 +23,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.zjut.controller.BaseController;
 import cn.edu.zjut.entity.Page;
 import cn.edu.zjut.service.ProgramService;
 import cn.edu.zjut.util.PageData;
+import cn.edu.zjut.view.ObjectExcelRead;
 import cn.edu.zjut.view.ProgramExcelView;
 
 @Controller
@@ -187,6 +199,76 @@ public class ProgramController extends BaseController{
 		log.info("导出用户观看电视节目信息到Excel表成功");
 		return mv;
 
+	}
+	
+	@RequestMapping("/downloadModel")
+	public void download(String fileName, HttpServletRequest request,HttpServletResponse response) {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("multipart/form-data");
+		response.setHeader("Content-Disposition", "attachment;fileName="+ fileName);
+		try {
+			String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+			// 这个download目录建立在classes
+			InputStream inputStream = new FileInputStream(new File(path+ File.separator+fileName));
+			OutputStream os = response.getOutputStream();
+			byte[] b = new byte[2048];
+			int length;
+			while ((length = inputStream.read(b)) > 0) {
+				os.write(b, 0, length);
+			}
+			// 这里主要关闭。
+			os.close();
+			inputStream.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// 返回值要注意，要不然就出现下面这句错误！
+		// java+getOutputStream() has already been called for this response
+		//return null;
+	}
+	
+	@RequestMapping("/toImportView")
+	public String toImportView() {
+		return "program/program_import";
+		
+	}
+	
+	@RequestMapping("/importFromExcel")
+	public void  importFromExcel(PrintWriter out,@RequestParam MultipartFile excelFile) {
+		if (excelFile == null) 
+		{
+			out.write("failed") ;
+			return;
+		}
+		// 获取文件名
+		String name = excelFile.getOriginalFilename();
+		// 判断文件大小
+		long size = excelFile.getSize();
+		if (name == null || ("").equals(name) && size == 0){
+			out.write("failed");
+			return;
+		}
+		try{
+			//存储图片的物理路径
+			String filepath = "E:\\upload\\";
+			//新的图片名称
+			String newFileName = UUID.randomUUID() + name.substring(name.lastIndexOf("."));
+			//新图片
+			File newFile = new File(filepath+newFileName);	
+			//将内存中的数据写入磁盘
+			excelFile.transferTo(newFile);
+			List list=ObjectExcelRead.readExcel(filepath, newFileName, 1, 0, 0);
+			//[PageData [map={var6=6300, var5=2015-11-01 01:27:00, var4=2015-11-01 01:27:00, var3=女神新装, var2=2803, var1=上海, var0=东方卫视高清}, request=null], 
+			programService.importFromExcel(list);
+			//System.out.println(list);	
+			out.write("success");
+			out.close();
+			out.flush();
+		} catch(Exception e){
+			logger.error(e.toString(), e);
+		}
 	}
 	
 }
