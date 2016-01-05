@@ -8,4 +8,8 @@ public interface ShowMapper {
 	
 	public List<PageData> provinceheat();
 
+	public List<PageData> hourshow();
+
+	public List<PageData> weekshow();
+
 }

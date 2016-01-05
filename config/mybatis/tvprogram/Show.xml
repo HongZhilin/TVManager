@@ -3,9 +3,17 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cn.edu.zjut.mapper.ShowMapper">
-    
     <select id="provinceheat"  resultType="pd">
         select province,program,sum(during) as maxtime from tb_program group by province;
+    </select>
+    
+    <select id="hourshow"  resultType="pd">
+        select date_format(endtime,'%Y-%m-%d') as day ,date_format(endtime,'%H:00') as hour,sum(during) as total from tb_program group by date_format(endtime,'%Y-%m-%d %H');
+    </select>
+    
+    <select id="weekshow"  resultType="pd">
+   	    select date_format(endtime,'%Y-%m-%d') as time,sum(during) as total from tb_program group by date_format(endtime,'%Y-%m-%d');
+
     </select>
 </mapper>
 

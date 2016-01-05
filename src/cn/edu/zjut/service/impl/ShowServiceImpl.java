@@ -15,7 +15,15 @@ public class ShowServiceImpl implements ShowService {
 	
 	public List<PageData> provinceheat() {
 		return showMapper.provinceheat();
-	
 	}
 
+	public List<PageData> hourshow() {
+		return showMapper.hourshow();
+	}
+
+	public List<PageData> weekshow() {
+		return showMapper.weekshow();
+	}
+	
+	
 }

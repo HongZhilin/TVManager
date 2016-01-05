@@ -17,11 +17,15 @@ public class ShowController extends BaseController {
 	
 	@Autowired
 	private ShowService showService;
-		
+	
+	/**
+	 * 进入省份最火节目页面
+	 * @return
+	 */
 	@RequestMapping(value="/provinceH")
 	public ModelAndView toProvinceHView(){
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("show/provinceheat");
+		mv.setViewName("show/province_favourite");
 		return mv;		
 	}
 	
@@ -34,6 +38,50 @@ public class ShowController extends BaseController {
 			logger.error(e.toString(),e);
 		}
 		return provinceH;		
+	}
+	
+	/**
+	 * 进入24小时收视统计页面
+	 * @return
+	 */
+	@RequestMapping(value="/hoursH")
+	public ModelAndView toHoursHView(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("show/hour_statistics");
+		return mv;		
+	}
+	
+	@RequestMapping(value="/getHoursH")
+	public @ResponseBody List<PageData> getHoursH(){
+		List<PageData> hoursH = null;
+		try{
+			hoursH=showService.hourshow();
+		}catch(Exception e){
+			logger.error(e.toString(),e);
+		}
+		return hoursH;		
+	}
+	
+	/**
+	 * 进入一周收视统计页面
+	 * @return
+	 */
+	@RequestMapping(value="/weekView")
+	public ModelAndView toWeekView(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("show/week_statistics");
+		return mv;		
+	}
+	
+	@RequestMapping(value="/getWeekView")
+	public @ResponseBody List<PageData> getWeekView(){
+		List<PageData> weekView = null;
+		try{
+			weekView=showService.weekshow();
+		}catch(Exception e){
+			logger.error(e.toString(),e);
+		}
+		return weekView;		
 	}
 	
 	

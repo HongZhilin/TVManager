@@ -7,5 +7,9 @@ import cn.edu.zjut.util.PageData;
 public interface ShowService {
 	
 	List<PageData> provinceheat();
+	
+	List<PageData> hourshow();
+
+	List<PageData> weekshow();
 
 }
