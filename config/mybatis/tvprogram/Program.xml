@@ -66,6 +66,12 @@
             #{idItem}
         </foreach>        
     </delete>
+    <!-- SELECT TIME,program,SUM(during) AS totaltime  FROM (SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS TIME,program,during FROM `tb_program`) AS tb_program_temp WHERE TIME='2015/11/01' GROUP BY program ORDER BY totaltime DESC LIMIT 10;
+     -->
+     
+     <!-- SELECT  TIME,NAME,SUM(during) AS VALUE FROM 
+(SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS TIME,program,during,province AS NAME FROM `tb_program`) AS tb_program_temp2
+GROUP BY TIME,NAME -->
     
 
 </mapper>
