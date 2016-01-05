@@ -30,6 +30,7 @@
 		<mapper resource="mybatis/tvprogram/Info.xml"/>
 		<mapper resource="mybatis/tvprogram/Program.xml"/>
 		<mapper resource="mybatis/tvprogram/Channel.xml"/>
+		<mapper resource="mybatis/tvprogram/Origin.xml"/>
 	</mappers>
 	
 </configuration>
