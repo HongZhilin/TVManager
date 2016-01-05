@@ -25,4 +25,7 @@
 	<bean id="originService" class="cn.edu.zjut.service.impl.OriginServiceImpl">
 		<!-- <property name="channelMapper" ref="channelMapper"/> -->
 	</bean>
+	<bean id="showService" class="cn.edu.zjut.service.impl.ShowServiceImpl">
+		<!-- <property name="channelMapper" ref="channelMapper"/> -->
+	</bean>
 </beans>
