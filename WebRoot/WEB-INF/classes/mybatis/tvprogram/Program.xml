@@ -39,6 +39,16 @@
         insert into tb_program (province,channel_name,channel_id,program,starttime,endtime,during) values(#{province},#{channelName},#{channelId},#{program},#{starttime},#{endtime},#{during})
     </insert>
     
+      <!-- 从excel导入-->
+    <insert id="importFromExcel" parameterType="java.util.List">  
+        insert into tb_program (province,channel_name,channel_id,program,starttime,endtime,during) values 
+        <foreach collection="list" item="item" index="index" separator=",">  
+            <!--var6=6300, var5=2015-11-01 01:27:00, var4=2015-11-01 01:27:00, var3=女神新装, var2=2803, var1=上海, var0=东方卫视高清
+             -->
+            (#{item.var1},#{item.var0},#{item.var2},#{item.var3},#{item.var4},#{item.var5},#{item.var6})  
+        </foreach>  
+    </insert>  
+    
     <!-- 修改 -->
     <update id="editProgram" parameterType="pd">
         update tb_program set g_id =#{g_id}, province =#{province}, channel_name =#{channelName}, channel_id = #{channelId},program=#{program}, starttime=#{starttime},endtime=#{endtime},during=#{during} where id=#{id}
@@ -56,5 +66,12 @@
             #{idItem}
         </foreach>        
     </delete>
+    <!-- SELECT TIME,program,SUM(during) AS totaltime  FROM (SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS TIME,program,during FROM `tb_program`) AS tb_program_temp WHERE TIME='2015/11/01' GROUP BY program ORDER BY totaltime DESC LIMIT 10;
+     -->
+     
+     <!-- SELECT  TIME,NAME,SUM(during) AS VALUE FROM 
+(SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS TIME,program,during,province AS NAME FROM `tb_program`) AS tb_program_temp2
+GROUP BY TIME,NAME -->
+    
 
 </mapper>
