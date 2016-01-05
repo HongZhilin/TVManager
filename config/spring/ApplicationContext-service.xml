@@ -16,13 +16,8 @@
 	<bean id="infoService" class="cn.edu.zjut.service.impl.InfoServiceImpl">
 		<property name="infoMapper" ref="infoMapper"/>
 	</bean>
-	<bean id="programService" class="cn.edu.zjut.service.impl.ProgramServiceImpl">
-		<!-- <property name="programMapper" ref="programMapper"/> -->
-	</bean>
-	<bean id="channelService" class="cn.edu.zjut.service.impl.ChannelServiceImpl">
-		<!-- <property name="channelMapper" ref="channelMapper"/> -->
-	</bean>
-	<bean id="originService" class="cn.edu.zjut.service.impl.OriginServiceImpl">
-		<!-- <property name="channelMapper" ref="channelMapper"/> -->
-	</bean>
+	<bean id="programService" class="cn.edu.zjut.service.impl.ProgramServiceImpl"/>
+	<bean id="channelService" class="cn.edu.zjut.service.impl.ChannelServiceImpl"/>
+	<bean id="originService" class="cn.edu.zjut.service.impl.OriginServiceImpl"/>
+	<bean id="businessService" class="cn.edu.zjut.service.impl.BusinessServiceImpl"/>
 </beans>

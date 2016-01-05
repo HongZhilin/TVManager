@@ -42,27 +42,7 @@ public class RoleController {
 		return "role/role_list";
 	}
 	
-	/**
-	 * 保存角色信息
-	 * @param out
-	 * @param role
-	 */
-	/*@RequestMapping(value="/save")
-	public void save(PrintWriter out,Role role){
-		boolean flag = true;
-		if(role.getRoleId()!=null && role.getRoleId().intValue()>0){
-			flag = roleService.updateRoleBaseInfo(role);
-		}else{
-			flag = roleService.insertRole(role);
-		}
-		if(flag){
-			out.write("success");
-		}else{
-			out.write("failed");
-		}
-		out.flush();
-		out.close();
-	}*/
+	
 	
 	/**
 	 * 保存角色信息
@@ -137,12 +117,13 @@ public class RoleController {
 	 * @param out
 	 */
 	@RequestMapping(value="/auth/save")
-	public void saveAuth(@RequestParam int roleId,@RequestParam String menuIds,PrintWriter out){
+	@ResponseBody
+	public String saveAuth(@RequestParam int roleId,@RequestParam String menuIds){
 		BigInteger rights = RightsHelper.sumRights(Tools.str2StrArray(menuIds));
 		Role role = roleService.getRoleById(roleId);
 		role.setRights(rights.toString());
 		roleService.updateRoleRights(role);
-		out.write("success");
-		out.close();
+		String flag="success";
+		return flag;
 	}
 }

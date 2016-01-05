@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.zjut.entity.Menu;
@@ -168,14 +169,15 @@ public class UserController {
 	 * @param out
 	 */
 	@RequestMapping(value="/auth/save")
-	public void saveAuth(@RequestParam int userId,@RequestParam String menuIds,PrintWriter out){
+	@ResponseBody
+	public String saveAuth(@RequestParam int userId,@RequestParam String menuIds){
 		BigInteger rights = RightsHelper.sumRights(Tools.str2StrArray(menuIds));
 		User user = userService.getUserById(userId);
 		user.setRights(rights.toString());
 		userService.updateUserRights(user);
-		out.write("success");
-		out.close();
 		log.info("保存用户权限成功！");
+		String flag="success";
+		return flag;
 	}
 	
 	/**

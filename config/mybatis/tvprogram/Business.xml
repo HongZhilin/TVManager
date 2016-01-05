@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.edu.zjut.mapper.BusinessMapper">
+
+    <!-- SELECT TIME,program,SUM(during) AS totaltime  FROM (SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS TIME,program,during FROM `tb_program`) AS tb_program_temp WHERE TIME='2015/11/01' GROUP BY program ORDER BY totaltime DESC LIMIT 10;
+     -->
+     
+     <!-- SELECT  TIME,NAME,SUM(during) AS VALUE FROM 
+(SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS TIME,program,during,province AS NAME FROM `tb_program`) AS tb_program_temp2
+GROUP BY TIME,NAME -->
+
+   <!-- 每日节目榜单-->
+    <select id="getTopNPie" parameterType="pd" resultType="pd">
+        SELECT time,program,SUM(during) AS totaltime 
+         FROM (SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS time,program,during FROM `tb_program`) AS tb_program_temp
+          WHERE TIME=#{time} GROUP BY program ORDER BY totaltime DESC LIMIT 10
+    </select>
+   <!-- 每日热门节目榜单-->
+    <select id="getProvinceHeat" resultType="pd">
+       SELECT  time,name,SUM(during) AS value FROM 
+        (SELECT DATE_FORMAT(`endtime`,'%Y/%m/%d') AS time,program,during,province AS name FROM `tb_program`) AS tb_program_temp2
+       GROUP BY TIME,NAME
+    </select>
+	
+</mapper>
